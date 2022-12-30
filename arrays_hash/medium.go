@@ -110,6 +110,40 @@ func ProductExceptSelf(nums []int) []int {
 	return answer
 }
 
+// Doing it this way we cannot save space complexity.
+func ProductExceptSelfBis(nums []int) []int {
+
+	prefix := make([]int, len(nums))
+	suffix := make([]int, len(nums))
+	output := make([]int, len(nums))
+
+	sum := 1
+	for i := range nums {
+		if i == 0 {
+			prefix[i] = 1
+		} else {
+			sum = sum * nums[i-1]
+			prefix[i] = sum
+		}
+	}
+
+	sum = 1
+	for i := len(nums) - 1; i >= 0; i-- {
+		if i == len(nums)-1 {
+			suffix[i] = sum
+		} else {
+			sum = sum * nums[i+1]
+			suffix[i] = sum
+		}
+	}
+
+	for i := range nums {
+		output[i] = prefix[i] * suffix[i]
+	}
+
+	return output
+}
+
 // Time Complexity O(n)
 // Space Complexity O(n)
 // Difficulty: Medium
