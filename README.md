@@ -7,3 +7,7 @@ This is a project lists the must know algorithms and problems for big tech compa
 - Do it [yourself](https://neetcode.io/practice)
 - [Roadmap](https://neetcode.io/roadmap)
 - [Train](https://leetcode.com/problemset/all/)
+
+# Testing
+
+This package contains no tests. Each algorithm works with leetcode test cases.
