@@ -43,3 +43,31 @@ func (kth *KthLargest) Add(val int) int {
 
 	return (kth.h)[0]
 }
+
+/* --------------------- Last Stone Weight -------------------- */
+
+// Time Complexity O(n)
+// Space Complexity O(n)
+func LastStoneWeight(stones []int) int {
+	// Init min heap
+	maxHeap := IntHeap{}
+	heap.Init(&maxHeap)
+	for _, stone := range stones {
+		heap.Push(&maxHeap, stone)
+	}
+
+	for len(maxHeap) > 1 {
+		// Pop the two
+		firstStone := heap.Pop(&maxHeap).(int)
+		secondStone := heap.Pop(&maxHeap).(int)
+
+		if firstStone != secondStone {
+			heap.Push(&maxHeap, firstStone-secondStone)
+		}
+	}
+
+	if len(maxHeap) == 0 {
+		return 0
+	}
+	return maxHeap[0]
+}
