@@ -26,3 +26,46 @@ func ReverseList(head *ListNode) *ListNode {
 	return previous
 
 }
+
+// Time Complexity O(n) because we are linearly iterating over the linkedlist.
+// Space Complexity O(1) because we are not creating any new data structure.
+func HasCycle(head *ListNode) bool {
+	if head == nil {
+		return false
+	}
+
+	currentNode := head
+	fasterNode := head.Next
+
+	for fasterNode != nil && fasterNode.Next != nil {
+		if currentNode == fasterNode {
+			return true
+		}
+		currentNode = currentNode.Next
+		fasterNode = fasterNode.Next.Next
+	}
+
+	return false
+}
+
+// Time Complexity O(n) because we are linearly iterating over the linkedlist.
+// Space Complexity O(n) because we are creating a map.
+func HasCycleBis(head *ListNode) bool {
+	if head == nil {
+		return false
+	}
+
+	visitedNodes := make(map[ListNode]int)
+	currentNode := head
+
+	for currentNode.Next != nil {
+
+		visitedNodes[*currentNode] += 1
+		if visitedNodes[*currentNode] > 1 {
+			return true
+		}
+		currentNode = currentNode.Next
+	}
+
+	return false
+}
