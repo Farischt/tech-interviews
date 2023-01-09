@@ -49,28 +49,12 @@ func MaxDepth(root *TreeNode) int {
 // Time Complexity O(n)
 // Space Complexity O(n)
 func IsSameTree(p *TreeNode, q *TreeNode) bool {
-
-	if p == nil && q == nil {
-		return true
+	if p == nil || q == nil {
+		return p == q
 	}
-
-	if p == nil && q != nil {
-		return false
-	} else if p != nil && q == nil {
-		return false
-	}
-
 	if p.Val != q.Val {
 		return false
 	}
+	return IsSameTree(p.Left, q.Left) && IsSameTree(p.Right, q.Right)
 
-	if !IsSameTree(p.Left, q.Left) {
-		return false
-	}
-
-	if !IsSameTree(p.Right, q.Right) {
-		return false
-	}
-
-	return true
 }
